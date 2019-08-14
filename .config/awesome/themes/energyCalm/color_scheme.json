@@ -1,0 +1,28 @@
+{
+    "wallpaper": "/home/infiltrator/.config/wpg/wallpapers/imageedit_3_7355660248.jpg",
+    "alpha": "",
+
+    "special": {
+        "background": "#0c0d0d",
+        "foreground": "#f1d98c",
+        "cursor": "#f1d98c"
+    },
+    "colors": {
+        "color0": "#0c0d0d",
+        "color1": "#D49314",
+        "color2": "#E39D10",
+        "color3": "#ECAE11",
+        "color4": "#DCA726",
+        "color5": "#D5A830",
+        "color6": "#F7C613",
+        "color7": "#f1d98c",
+        "color8": "#a89762",
+        "color9": "#D49314",
+        "color10": "#E39D10",
+        "color11": "#ECAE11",
+        "color12": "#DCA726",
+        "color13": "#D5A830",
+        "color14": "#F7C613",
+        "color15": "#f1d98c"
+    }
+}
