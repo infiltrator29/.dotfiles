@@ -6,14 +6,20 @@ let mapleader = ","
 
 
 
-
-
 " Plugins (with vim-plug) {{{
+filetype plugin on
+
 call plug#begin('~/.vim/plugged')
 
-Plug 'sjl/gundo.vim'	    " Graphical undo tree - 'super undo'
-Plug 'mileszs/ack.vim'	    " Sourcecode search tool (like grep)
-Plug 'ctrlpvim/ctrlp.vim'   " Fuzzy file, buffer, mru... finder
+Plug 'sjl/gundo.vim'	                " Graphical undo tree - 'super undo'
+Plug 'mileszs/ack.vim'	                " Sourcecode search tool (like grep)
+Plug 'ctrlpvim/ctrlp.vim'               " Fuzzy file, buffer, mru... finder
+Plug 'vim-airline/vim-airline'          " Lightweight powerline for vim
+Plug 'vim-airline/vim-airline-themes'   " Themes for powerline
+Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }    " python-mode
+Plug 'scrooloose/nerdtree'              " Show file tree in vim
+Plug 'Xuyuanp/nerdtree-git-plugin'      " Addon for NERDTree - add git status flag
+Plug 'scrooloose/nerdcommenter'         " Auto Comment blocks of code
 
 " initialize plugin system
 call plug#end()
@@ -37,12 +43,17 @@ set wildmenu        " visual autocomplete for command menu
 set showmatch       " highlight matching brackets
 filetype indent on  " load filetype-specific indent files
 
+
 " }}}
 " Text formating {{{
 
-" paste below the line
-nnoremap <leader>p o<ESC>p
+" change block of code indent
+vnoremap < <gv
+vnoremap > >gv
 
+"inaert single char in normal mode
+:nnoremap s :exec "normal i".nr2char(getchar())."\e"<CR>
+:nnoremap S :exec "normal a".nr2char(getchar())."\e"<CR>
 
 " }}}
 " Searching {{{
@@ -52,7 +63,18 @@ set hlsearch        " highlight matches
 nnoremap <leader><space> :nohlsearch<CR>
 
 " }}}
-" Folding {{{
+" {{{ Copying and Pasting
+
+" paste below the line
+nnoremap <leader>p o<ESC>p
+
+" paste blocks of codes with fixed indents
+nnoremap <F2> :set invpaste paste?<CR>
+set pastetoggle=<F2>
+set showmode
+
+" }}}
+" Folding and Text wrapping {{{
 set foldenable      " enable folding
 set foldlevelstart=10   " most folds will be open
 set foldnestmax=10
@@ -60,11 +82,26 @@ set foldmethod=indent
 " space open/closes folds
 nnoremap <space> za
 
+" text wrapping ('gq') 
+set textwidth=79
+set nowrap
+set fo-=t
+set colorcolumn=80
+highlight ColorColumn ctermbg=233
+
+
 " }}}
-" Better Cursor Movement {{{
+" Better Movement {{{
+
 " -- move vertically by visual line (when folded)
 nnoremap j gj
 nnoremap k gk
+
+" better split window navigation (CTRL + h/j/l/l)
+map <c-j> <c-w>j
+map <c-k> <c-w>k
+map <c-l> <c-w>l
+map <c-h> <c-w>h
 
 " }}}
 " Autogroups (language-specific settings) {{{
@@ -87,7 +124,6 @@ augroup configgroup
     autocmd FileType ruby setlocal commentstring=#\ %s
     autocmd FileType python setlocal commentstring=#\ %s
     autocmd BufEnter *.cls setlocal filetype=java
-    autocmd BufEnter *.zsh-theme setlocal filetype=zsh
     autocmd BufEnter Makefile setlocal noexpandtab
     autocmd BufEnter *.sh setlocal tabstop=2
     autocmd BufEnter *.sh setlocal shiftwidth=2
@@ -132,6 +168,7 @@ endfunction
 "}}}
 
 " CtrlP settings {{{
+let g:ctrlp_max_height = 30
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
@@ -156,20 +193,109 @@ if executable('ag')
 endif
 
 " }}}
-
-" Vim behavior (config without category) {{{
-
-
-set modelines=1     "read the last line and change config for specific file
+" {{{ Gundo settings
 
 " toggle gundo (graphical undo tree) - "super undo"
 nnoremap <leader>u :GundoToggle<CR>
 
-" save session - "super save" - reopen saved session with 'vim -S'
-nnoremap <leader>s :mksession<CR>
+" }}}
+" {{{ vim-airline settings
+    
+" enable Smarter tab line
+let g:airline#extensions#tabline#enabled = 1
+
+" powerline font symbols
+let g:airline_powerline_fonts = 1
+
+
+" Overriding the inactive statuslin
+function! Render_Only_File(...)
+  let builder = a:1
+  let context = a:2
+
+  call builder.add_section('file', '! %F')
+
+" return 0   " the default: draw the rest of the statusline
+" return -1  " do not modify the statusline
+  return 1   " modify the statusline with the current contents of the builder
+endfunction
+call airline#add_inactive_statusline_func('Render_Only_File')
+
+" Add the window number in front of the mode
+function! WindowNumber(...)
+    let builder = a:1
+    let context = a:2
+    call builder.add_section('airline_b', '%{tabpagewinnr(tabpagenr())}')
+    return 0
+endfunction
+
+call airline#add_statusline_func('WindowNumber')
+call airline#add_inactive_statusline_func('WindowNumber')
+
+" }}}
+" {{{ python-mode settings
+
+let g:pymode_python = 'python3'     " python 3 syntax
+
+" Open file with object definition
+map <Leader>g :call RopeGotoDefinition()<CR>
+
+
+let ropevim_enable_shortcuts = 1    " enable shortcuts
+let g:pymode_rope_goto_def_newwin = "vnew"  " open new window vertically
+let g:pymode_rope_extended_complete = 1
+let g:pymode_breakpoint = 0
+let g:pymode_syntax = 1
+let g:pymode_virtualenv = 1
+
+" OmniPopup movement
+set completeopt=longest,menuone
+function! OmniPopup(action)
+    if pumvisible()
+        if a:action == 'j'
+            return "\<C-N>"
+        elseif a:action == 'k'
+            return "\<C-P>"
+        endif
+    endif
+    return a:action
+endfunction
+
+inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
+inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
+
+" }}}
+" {{{ NERDTree settings
+
+" toogle NERDTree
+noremap <leader>t :NERDTreeToggle<CR>
+" close NERDTree with the last buffor
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " }}}
 
+" Vim behavior (config without category) {{{
+
+" quick save (CTRL + z)
+noremap <C-Z> :update<CR>
+vnoremap <C-Z> <C-C>:update<CR>
+inoremap <C-Z> <C-O>:update<CR>
+
+" quick exit
+noremap <Leader>e :quit<CR>
+noremap <Leader>E :qa!<CR>
+
+" save session - "super save" - reopen saved session with 'vim -S'
+nnoremap <leader>s :mksession<CR>
+
+" Change timeout lenght (faster changing  airline insert>normal status)
+set timeoutlen=1500
+
+set modelines=1     "read the last line and change config for specific file
+
+
+
+" }}}
 
 
 
