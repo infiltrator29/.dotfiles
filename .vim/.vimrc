@@ -20,6 +20,7 @@ Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }    " py
 Plug 'scrooloose/nerdtree'              " Show file tree in vim
 Plug 'Xuyuanp/nerdtree-git-plugin'      " Addon for NERDTree - add git status flag
 Plug 'scrooloose/nerdcommenter'         " Auto Comment blocks of code
+Plug 'deviantfero/wpgtk.vim'            " Vim colorscheme working with wpgtk
 
 " initialize plugin system
 call plug#end()
@@ -27,6 +28,8 @@ call plug#end()
 " }}}
 " Colors and apperance {{{
 syntax enable	" enable syntax processing
+
+colorscheme wpgtk
 
 " }}}
 " Spaces and Tabs {{{
@@ -238,18 +241,21 @@ call airline#add_inactive_statusline_func('WindowNumber')
 let g:pymode_python = 'python3'     " python 3 syntax
 
 " Open file with object definition
-map <Leader>g :call RopeGotoDefinition()<CR>
+let g:pymode_rope_goto_definition_bind = '<leader>g'
+
+let g:pymode_rope = 1   " turn on rope script
 
 
 let ropevim_enable_shortcuts = 1    " enable shortcuts
-let g:pymode_rope_goto_def_newwin = "vnew"  " open new window vertically
+let g:pymode_rope_goto_definition_cmd = 'vnew'  " open new window vertically
 let g:pymode_rope_extended_complete = 1
 let g:pymode_breakpoint = 0
 let g:pymode_syntax = 1
 let g:pymode_virtualenv = 1
 
 " OmniPopup movement
-set completeopt=longest,menuone
+"set completeopt=longest,menuone
+set completeopt=menuone,noinsert
 function! OmniPopup(action)
     if pumvisible()
         if a:action == 'j'
@@ -286,10 +292,16 @@ noremap <Leader>e :quit<CR>
 noremap <Leader>E :qa!<CR>
 
 " save session - "super save" - reopen saved session with 'vim -S'
-nnoremap <leader>s :mksession<CR>
+nnoremap <leader>s :mksession!<CR>
 
 " Change timeout lenght (faster changing  airline insert>normal status)
 set timeoutlen=1500
+
+" edit vimrc and load vimrc bindings
+nnoremap <leader>ev :vsp $MYVIMRC<CR>
+nnoremap <leader>sv :source $MYVIMRC<CR>
+
+set hidden          " can't close buffer(s) without save
 
 set modelines=1     "read the last line and change config for specific file
 

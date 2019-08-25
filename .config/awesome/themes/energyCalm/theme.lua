@@ -29,9 +29,9 @@ theme.bg_systray = theme.bg_normal
 
 -- {{{ Borders
 -- theme.border_width  = dpi(5)
-theme.border_width  =  dpi(4)  
-theme.border_normal = "#3F3F3F"
-theme.border_focus  = "#6F6F6F"
+theme.border_width  =  dpi(3)  
+theme.border_normal = "#0A0C0F"
+theme.border_focus  = "#981839"
 theme.border_marked = "#CC9393"
 theme.maximized_hide_border = true
 -- }}}
@@ -42,7 +42,7 @@ theme.titlebar_bg_normal = "#3F3F3F"
 -- }}}
 
 -- {{{ Useless gaps
- theme.useless_gap = dpi(15)  
+ theme.useless_gap = dpi(5)  
 -- }}}
 
 -- {{{ Tasklist
