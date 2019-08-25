@@ -39,7 +39,7 @@ set expandtab		" tabs are spaces
 
 " }}}
 " UserInterface configuration {{{
-set number	        " show line numbers
+set relativenumber	        " show line numbers
 set cursorline      " highlite current line
 set showcmd         " show last command in the bottom
 set wildmenu        " visual autocomplete for command menu
