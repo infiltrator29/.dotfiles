@@ -288,7 +288,7 @@ awful.rules.rules = {
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true}
+      }, properties = { titlebars_enabled = false }
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
@@ -368,12 +368,12 @@ client.connect_signal("request::titlebars", function(c)
         end
     end)
 
-    awful.tag.attached_connect_signal(s, "property::layout", function (t)
-        local float = t.layout.name == "floating"
-	for _,c in pairs(t:clients()) do
-	    c.floating = float
-	end
-    end)
+    --awful.tag.attached_connect_signal(s, "property::layout", function (t)
+    --    local float = t.layout.name == "floating"
+	--for _,c in pairs(t:clients()) do
+	--    c.floating = float
+	--end
+    --end)
 
 end)
 

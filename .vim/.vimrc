@@ -21,6 +21,7 @@ Plug 'scrooloose/nerdtree'              " Show file tree in vim
 Plug 'Xuyuanp/nerdtree-git-plugin'      " Addon for NERDTree - add git status flag
 Plug 'scrooloose/nerdcommenter'         " Auto Comment blocks of code
 Plug 'deviantfero/wpgtk.vim'            " Vim colorscheme working with wpgtk
+Plug 'junegunn/goyo.vim'                " Vim distraction free mode
 
 " initialize plugin system
 call plug#end()
@@ -105,6 +106,12 @@ map <c-j> <c-w>j
 map <c-k> <c-w>k
 map <c-l> <c-w>l
 map <c-h> <c-w>h
+
+
+" Navigating with guides
+inoremap <leader><leader> <Esc>/<++><Enter>"_c4l
+vnoremap <leader><leader> <Esc>/<++><Enter>"_c4l
+map <leader><leader> <Esc>/<++><Enter>"_c4l
 
 " }}}
 " Autogroups (language-specific settings) {{{
@@ -195,12 +202,7 @@ if executable('ag')
 	  let g:ackprg = 'ag --vimgrep'
 endif
 
-" }}}
-" {{{ Gundo settings
-
-" toggle gundo (graphical undo tree) - "super undo"
-nnoremap <leader>u :GundoToggle<CR>
-
+" }}} " {{{ Gundo settings " toggle gundo (graphical undo tree) - "super undo" nnoremap <leader>u :GundoToggle<CR> 
 " }}}
 " {{{ vim-airline settings
     
@@ -308,7 +310,6 @@ set modelines=1     "read the last line and change config for specific file
 
 
 " }}}
-
 
 
 

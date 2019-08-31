@@ -23,8 +23,8 @@ globalkeys = gears.table.join(
     awful.key({"Shift"}, "Print", function() awful.util.spawn_with_shell("cd ~/Screenshots && sleep 0.5 && escrotum -s") end),
     awful.key({"Control"}, "Print", function() awful.util.spawn_with_shell("sleep 0.5 && escrotum -C") end),
     awful.key({"Shift", "Control"}, "Print", function() awful.util.spawn_with_shell("sleep 0.5 && escrotum -s -C") end),    
-    awful.key({ "Shift"         }, "Shift_R", function() kbdcfg:next() end ),
-    awful.key({ "Mod4", "Shift" }, "Shift_R", function() kbdcfg:prev() end ),
+    --awful.key({ "Shift"         }, "Shift_R", function() kbdcfg:next() end ),
+    --awful.key({ "Mod4", "Shift" }, "Shift_R", function() kbdcfg:prev() end ),
 
 
     awful.key({ modkey, "Control" }, "o",
@@ -188,6 +188,11 @@ keys.clientkeys = gears.table.join(
     awful.key({ modkey, "Mod1"   }, "h",   function (c) c:relative_move(-20,   0,   0,   0) end, {description = "move window left", group = "client"}),
     awful.key({ modkey, "Mod1"   }, "l",  function (c) c:relative_move( 20,   0,   0,   0) end, {description = "move window right", group = "client"}),
 
+    awful.key({ modkey, "Mod1", "Shift"   }, "j",   function (c) c:relative_move(  0,  50,   0,   0) end, {description = "move window down", group = "client"}),
+    awful.key({ modkey, "Mod1", "Shift"   }, "k",     function (c) c:relative_move(  0, -50,   0,   0) end, {description = "move window up", group = "client"}),
+    awful.key({ modkey, "Mod1", "Shift"   }, "h",   function (c) c:relative_move(-50,   0,   0,   0) end, {description = "move window left", group = "client"}),
+    awful.key({ modkey, "Mod1", "Shift"   }, "l",  function (c) c:relative_move( 50,   0,   0,   0) end, {description = "move window right", group = "client"}),
+    
     -- }}
     
 
