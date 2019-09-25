@@ -11,12 +11,15 @@ case $- in
 esac
 
 # Path to the bash it configuration
-export BASH_IT="/home/infiltrator/.bash_it"
+export BASH_IT="/home/infiltrator/.bash_it/config"
+
+# Path to the custom things
+export BASH_IT_CUSTOM="/home/infiltrator/.bash_it/custom"
 
 # Lock and Load a custom theme file.
 # Leave empty to disable theming.
 # location /.bash_it/themes/
-export BASH_IT_THEME='modern-time'
+export BASH_IT_THEME='modern-time-custom'
 
 # (Advanced): Change this to the name of your remote repo if you
 # cloned bash-it with a remote other than origin such as `bash-it`.
@@ -67,6 +70,11 @@ source "$BASH_IT"/bash_it.sh
 
 # }}}
 
+#Allow to navigate without cd (only path)
+shopt -s autocd
+
+#Set vim shortcuts
+set -o vi
 
 #'Delete' key work in ST:
 tput smkx

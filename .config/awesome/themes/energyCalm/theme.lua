@@ -42,7 +42,7 @@ theme.titlebar_bg_normal = "#3F3F3F"
 -- }}}
 
 -- {{{ Useless gaps
- --theme.useless_gap = dpi(5)  
+theme.useless_gap = dpi(0)  
 -- }}}
 
 -- {{{ Tasklist

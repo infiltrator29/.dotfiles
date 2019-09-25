@@ -30,13 +30,22 @@ globalkeys = gears.table.join(
     awful.key({ modkey, "Control" }, "o",
           function ()
           local c = client.focus
-	  c.floating = not c.floating end,
-          
+              c.floating = not c.floating end,
           {description = "Toggle floating", group = "Clients"}),
 
     --awful.key({ modkey,		}, "q", dmenuTasklist.get_tasks),
 
     --}}}
+    -- {{{ Change gap size (custom)
+    
+    awful.key({ modkey,           }, "[",      function () awful.tag.incgap(-1) end, {description = "decrease useless gap", group = "layout"}),
+    awful.key({ modkey,           }, "]",      function () awful.tag.incgap(1) end, {description = "increase useless gap", group = "layout"}),
+
+
+    awful.key({ modkey, "Shift"     }, "[",      function () awful.tag.incgap(-9) end, {description = "decrease useless gap (faster)", group = "layout"}),
+    awful.key({ modkey, "Shift"     }, "]",      function () awful.tag.incgap(9) end, {description = "increase useless gap (faster)", group = "layout"}),
+
+    -- }}}
 
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
@@ -196,7 +205,7 @@ keys.clientkeys = gears.table.join(
     -- }}
     
 
-    -- {{ Resize windows (custom)
+    -- {{{ Resize windows (custom)
     
     awful.key({ modkey, "Shift"   }, "Next",   function (c) c:relative_move( 20,  20, -40, -40) end, {description = "increase window size", group = "client"}),
     awful.key({ modkey, "Shift"   }, "Prior",  function (c) c:relative_move(-20, -20,  40,  40) end, {description = "decrease window size", group = "client"}),
@@ -207,16 +216,16 @@ awful.key({ modkey, "Mod1", "Control"  }, "h",   function (c) c:relative_move( 2
 awful.key({ modkey, "Mod1", "Control"   }, "l",   function (c) c:relative_move( -20, 0, 40, 0) end, {description = "increase window width", group = "client"}),
 
 
-    -- }}
+    -- }}}
     
-    -- {{ Resize windows in tiling (custom)
+    -- {{{ Resize windows in tiling (custom)
 
     awful.key({ modkey, "Mod1"    }, "Right",     function () awful.tag.incmwfact( 0.01)    end),
     awful.key({ modkey, "Mod1"    }, "Left",     function () awful.tag.incmwfact(-0.01)    end),
     awful.key({ modkey, "Mod1"    }, "Down",     function () awful.client.incwfact( 0.01)    end),
     awful.key({ modkey, "Mod1"    }, "Up",     function () awful.client.incwfact(-0.01)    end)
 
-    -- }}
+    -- }}}
 )
 
 -- Bind all key numbers to tags.
