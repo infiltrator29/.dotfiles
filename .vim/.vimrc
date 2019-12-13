@@ -33,15 +33,16 @@ syntax enable	" enable syntax processing
 colorscheme wpgtk
 
 " }}}
-" Spaces and Tabs {{{
-set tabstop=4		" show tab as 4 spaces
-set softtabstop=4	" tab indent = 4 spaces (when editing)
-set shiftwidth=4    " auto indent value
-set expandtab		" tabs are spaces
+    " Spaces and Tabs {{{
+    set tabstop=4		" show tab as 4 spaces
+    set softtabstop=4	" tab indent = 4 spaces (when editing)
+    set shiftwidth=4    " auto indent value
+    set expandtab		" tabs are spaces
 
-" }}}
+    " }}}
 " UserInterface configuration {{{
-set relativenumber	        " show line numbers
+set number
+set relativenumber	" show line numbers
 set cursorline      " highlite current line
 set showcmd         " show last command in the bottom
 set wildmenu        " visual autocomplete for command menu
@@ -120,7 +121,7 @@ inoremap <leader>w <Esc>/<++><Enter>"_c4l<Esc><c-o>:nohlsearch<CR>a
 map <leader>w /<++><Enter>"_c4l<Esc><c-o>:nohlsearch<CR>
 
 " }}}
-" Snippets and Autogroups (language-specific settings) {{{
+" Snippets and Autogroups (language-specific settings) 
 
 " Templates
 nnoremap ,html :-1read $HOME/.vim/templates/skeleton.html<Enter>
@@ -152,13 +153,30 @@ augroup END
 
 augroup autoclosingConfig 
     autocmd!
-    autocmd Filetype php,html,python,css,javascript inoremap ( ()<++><Esc>F(a
-    autocmd Filetype php,html,python,css,javascript inoremap *( (
+    autocmd Filetype * inoremap ( ()<++><Esc>F(a
+    autocmd Filetype * inoremap *( (
+    autocmd Filetype * inoremap () ()
+    autocmd Filetype * inoremap ' ''<++><Esc>F';a
+    autocmd Filetype * inoremap ;' '
+    autocmd Filetype * inoremap '' ''
+    autocmd Filetype * inoremap " ""<++><Esc>F";a
+    autocmd Filetype * inoremap :" "
+    autocmd Filetype * inoremap "" ""
     autocmd Filetype python inoremap { {}<++><Esc>F{a
     autocmd Filetype python inoremap *{ {
+    autocmd Filetype python inoremap {} {}
     autocmd Filetype python inoremap [ []<++><Esc>F[a
     autocmd Filetype python inoremap *[ [
-    autocmd Filetype php,css,javascript inoremap { {<Enter>}<Esc>O
+    autocmd Filetype python inoremap [] []
+    autocmd Filetype php,css,javascript,lua inoremap { {<Enter>}<Esc>O
+augroup END
+
+augroup pythonConfig
+    autocmd!
+    " Code Snippets
+    autocmd Filetype python nnoremap ,she i#!/usr/bin/env<space>python<Esc>o<Enter>
+    autocmd Filetype python inoremap ,im import<space>
+    autocmd Filetype python inoremap ,fim from<space><space>import<space><++><Esc>2b2ha
 augroup END
 
 augroup rmdConfig
@@ -187,13 +205,14 @@ augroup htmlConfig
 	autocmd FileType html,php inoremap ,p <p></p><Enter><Enter><++><Esc>02kf>a
     autocmd FileType html,php inoremap ,im <img src="" alt="<++>"><++><esc>Fcf"a
     autocmd FileType html,php inoremap ,a <a<Space>href=""><++></a><Space><++><Esc>14hi
+    autocmd FileType html,php inoremap ,d <div><Enter></div><++><Esc>kA<Enter>
 augroup END
 
 augroup cssConfig
     autocmd!
     "Code snippets
 augroup END
-"}}}
+
 " Backups {{{
 " -- save backup files in /tmp
 set backup

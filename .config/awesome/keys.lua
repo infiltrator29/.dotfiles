@@ -4,6 +4,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 local env = require("env-configuration")
 
 -- Custom modules
+local machi = require("layout-machi") -- machi - manual layout
 --local dmenuTasklist = require("modules.dmenuTasklist")
 
 local keys = {}
@@ -35,7 +36,16 @@ globalkeys = gears.table.join(
 
     --awful.key({ modkey,		}, "q", dmenuTasklist.get_tasks),
 
+        
+    awful.key({ modkey,    }, "/", function() 
+        local s = awful.screen.focused()
+        local l = awful.layout.get(s)
+        local editor = machi.default_editor
+        editor.start_interactive(s, l)
+    end,
+              {description = "Edit manual (machi) layout", group = "layout"}),
     --}}}
+     
     -- {{{ Change gap size (custom)
     
     awful.key({ modkey,           }, "[",      function () awful.tag.incgap(-1) end, {description = "decrease useless gap", group = "layout"}),
