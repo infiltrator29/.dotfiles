@@ -11,7 +11,7 @@ filetype plugin on
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'sjl/gundo.vim'	                " Graphical undo tree - 'super undo'
+Plug 'simnalamburt/vim-mundo'           " Graphical undo tree - 'super undo'
 Plug 'mileszs/ack.vim'	                " Sourcecode search tool (like grep)
 Plug 'ctrlpvim/ctrlp.vim'               " Fuzzy file, buffer, mru... finder
 Plug 'vim-airline/vim-airline'          " Lightweight powerline for vim Plug 'vim-airline/vim-airline-themes'   " Themes for powerline
@@ -22,6 +22,7 @@ Plug 'scrooloose/nerdcommenter'         " Auto Comment blocks of code
 Plug 'deviantfero/wpgtk.vim'            " Vim colorscheme working with wpgtk
 Plug 'junegunn/goyo.vim'                " Vim distraction free mode
 Plug 'takac/vim-hardtime'               " Hardtime for better vim habits
+Plug 'vimwiki/vimwiki'                  " Plugin for taking and organizing notes
 
 " initialize plugin system
 call plug#end()
@@ -121,7 +122,7 @@ inoremap <leader>w <Esc>/<++><Enter>"_c4l<Esc><c-o>:nohlsearch<CR>a
 map <leader>w /<++><Enter>"_c4l<Esc><c-o>:nohlsearch<CR>
 
 " }}}
-" Snippets and Autogroups (language-specific settings) 
+" Snippets and Autogroups (language-specific settings) {{{
 
 " Templates
 nnoremap ,html :-1read $HOME/.vim/templates/skeleton.html<Enter>
@@ -213,6 +214,8 @@ augroup cssConfig
     "Code snippets
 augroup END
 
+" }}}
+
 " Backups {{{
 " -- save backup files in /tmp
 set backup
@@ -277,7 +280,7 @@ endif
     " }}} 
 " {{{ Gundo settings 
 " toggle gundo (graphical undo tree) - "super undo"
-nnoremap <leader>u :GundoToggle<CR> 
+nnoremap <leader>u :MundoToggle<CR> 
 " }}}
     " {{{ vim-airline settings
         
@@ -357,9 +360,16 @@ nnoremap <leader>u :GundoToggle<CR>
 
     " }}}
 " Hardtime settings {{{ 
-let g:hardtime_default_on = 1   " Always run harditme
+let g:hardtime_default_on = 0   " Always run harditme
 let g:hardtime_allow_different_key = 1 " Allow different keys
 let g:hardtime_maxcount = 2         " Maximum number of repetative key press
+" }}}
+" Vimwiki settings {{{
+
+let g:vimwiki_list = [{'path': '~/Documents/notes',
+                      \ 'syntax': 'default', 'ext': '.wiki'}]
+
+let g:vimwiki_folding = 'list'
 " }}}
 
     " Vim behavior (config without category) {{{
