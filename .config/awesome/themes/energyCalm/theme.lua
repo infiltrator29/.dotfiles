@@ -1,6 +1,6 @@
 ----------------------------------
 --  "energyCalm" awesome theme  --
---    Jacek Dz. (infiltrator)   --
+--       by infiltrator         --
 ----------------------------------
 
 local themes_path = require("gears.filesystem").get_themes_dir()

@@ -14,7 +14,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'simnalamburt/vim-mundo'           " Graphical undo tree - 'super undo'
 Plug 'mileszs/ack.vim'	                " Sourcecode search tool (like grep)
 Plug 'ctrlpvim/ctrlp.vim'               " Fuzzy file, buffer, mru... finder
-Plug 'vim-airline/vim-airline'          " Lightweight powerline for vim Plug 'vim-airline/vim-airline-themes'   " Themes for powerline
+Plug 'vim-airline/vim-airline'          " Lightweight powerline for vim
+Plug 'vim-airline/vim-airline-themes'   " Themes for powerline
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }    " python-mode
 Plug 'scrooloose/nerdtree'              " Show file tree in vim
 Plug 'Xuyuanp/nerdtree-git-plugin'      " Addon for NERDTree - add git status flag
@@ -23,6 +24,7 @@ Plug 'deviantfero/wpgtk.vim'            " Vim colorscheme working with wpgtk
 Plug 'junegunn/goyo.vim'                " Vim distraction free mode
 Plug 'takac/vim-hardtime'               " Hardtime for better vim habits
 Plug 'vimwiki/vimwiki'                  " Plugin for taking and organizing notes
+Plug 'ryanoasis/vim-devicons'           " Add icons for VIM plugins (need load after the other plugins) - Nerd Fonts needed
 
 " initialize plugin system
 call plug#end()
@@ -58,7 +60,7 @@ filetype indent on  " load filetype-specific indent files
 vnoremap < <gv
 vnoremap > >gv
 
-"inaert single char in normal mode
+"insert single char in normal mode
 :nnoremap s :exec "normal i".nr2char(getchar())."\e"<CR>
 :nnoremap S :exec "normal a".nr2char(getchar())."\e"<CR>
 
@@ -89,9 +91,11 @@ set foldmethod=indent
 " space open/closes folds
 nnoremap <space> za
 
+
 " text wrapping ('gq') 
 set textwidth=79
-set nowrap
+set nowrap 
+set linebreak   " don't break words
 set fo-=t
 set colorcolumn=80
 highlight ColorColumn ctermbg=233
