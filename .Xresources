@@ -1,3 +1,4 @@
+*.font: SauceCodePro Nerd Font:semibold:pixelsize=19::antialias=true:autohint=true;
 *.alpha: 1
 ranger.font: -*-terminus-bold-r-*-*-20-*-*-*-*-*-*-*
 

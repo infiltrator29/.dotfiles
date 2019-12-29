@@ -120,7 +120,7 @@ inoremap <leader><leader> <Esc>/<++><Enter>"_c4l
 vnoremap <leader><leader> <Esc>/<++><Enter>"_c4l
 map <leader><leader> <Esc>/<++><Enter>"_c4l
 " Delete all guides
-map <leader>q :%s/<++>//g<Enter>:nohlsearch<CR>
+"map <leader>q :%s/<++>//g<Enter>:nohlsearch<CR>
 " Delete next guide
 inoremap <leader>w <Esc>/<++><Enter>"_c4l<Esc><c-o>:nohlsearch<CR>a
 map <leader>w /<++><Enter>"_c4l<Esc><c-o>:nohlsearch<CR>
@@ -272,9 +272,9 @@ endif
 
 " open ack.vim
 " -- Open first matching file
-nnoremap <leader>A :Ack
+nnoremap <leader>A :Ack 
 " -- Searching without opening first matching file
-nnoremap <leader>a :Ack!
+nnoremap <leader>a :Ack! 
 
 " using The Silver Searcher if available
 if executable('ag')
@@ -328,14 +328,22 @@ nnoremap <leader>u :MundoToggle<CR>
     let g:pymode_rope_goto_definition_bind = '<leader>g'
 
     let g:pymode_rope = 1   " turn on rope script
+    let g:pymode_rope_autoimport = 1
+
+    " Debugging
+    let g:pymode_breakpoint = 1
+    let g:pymode_breakpoint_bind = '<leader>b'
+    let g:pymode_breakpoint_cmd = ''
 
 
     let ropevim_enable_shortcuts = 1    " enable shortcuts
     let g:pymode_rope_goto_definition_cmd = 'vnew'  " open new window vertically
     let g:pymode_rope_extended_complete = 1
-    let g:pymode_breakpoint = 0
     let g:pymode_syntax = 1
     let g:pymode_virtualenv = 1
+
+    "TEMP! change mapping ,r to run python prompt
+    noremap  <silent><leader>q :w<CR>:!nohup st -e ipython % > /dev/null <CR>
 
     " OmniPopup movement
     "set completeopt=longest,menuone
