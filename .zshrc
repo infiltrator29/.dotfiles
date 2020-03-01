@@ -121,7 +121,7 @@ source $ZSH/oh-my-zsh.sh
 # {{{ Aliases
 
 # Alias for manage dotfiles git repo
-alias config='/usr/bin/git --git-dir=/home/infiltrator/.dotfiles/ --work-tree=/home/infiltrator'
+alias dotfiles='/usr/bin/git --git-dir=/home/infiltrator/.dotfiles/ --work-tree=/home/infiltrator'
 #LSD alias
 alias ls='lsd'
 alias lst='lsd --tree'
