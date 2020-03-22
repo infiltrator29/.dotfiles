@@ -72,6 +72,7 @@ COMPLETION_WAITING_DOTS="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+    vi-mode
     git 
     colored-man-pages 
     compleat 

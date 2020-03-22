@@ -25,6 +25,8 @@ Plug 'junegunn/goyo.vim'                " Vim distraction free mode
 Plug 'takac/vim-hardtime'               " Hardtime for better vim habits
 Plug 'vimwiki/vimwiki'                  " Plugin for taking and organizing notes
 Plug 'ryanoasis/vim-devicons'           " Add icons for VIM plugins (need load after the other plugins) - Nerd Fonts needed
+Plug 'altercation/vim-colors-solarized' " Solarized colorscheme
+Plug 'luochen1990/rainbow'              " Coloring parentheses
 
 " initialize plugin system
 call plug#end()
@@ -33,7 +35,9 @@ call plug#end()
 " Colors and apperance {{{
 syntax enable	" enable syntax processing
 
-colorscheme wpgtk
+colorscheme solarized
+set background=dark
+let g:airline_theme='wpgtk_alternate'
 
 " }}}
     " Spaces and Tabs {{{
@@ -98,8 +102,6 @@ set nowrap
 set linebreak   " don't break words
 set fo-=t
 set colorcolumn=80
-highlight ColorColumn ctermbg=233
-
 
 " }}}
 " Better Movement {{{
@@ -107,6 +109,9 @@ highlight ColorColumn ctermbg=233
 " -- move vertically by visual line (when folded)
 nnoremap j gj
 nnoremap k gk
+
+" go to normal mode when h/j/k/l is hold (for scrolling)
+inoremap jj <esc>
 
 " better split window navigation (CTRL + h/j/l/l)
 map <c-j> <c-w>j
@@ -378,10 +383,13 @@ let g:hardtime_maxcount = 2         " Maximum number of repetative key press
 " }}}
 " Vimwiki settings {{{
 
-let g:vimwiki_list = [{'path': '~/Documents/notes',
+let g:vimwiki_list = [{'path': '~/dox/notes',
                       \ 'syntax': 'default', 'ext': '.wiki'}]
 
 let g:vimwiki_folding = 'list'
+" }}}
+" Rainbow settings {{{
+let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 " }}}
 
     " Vim behavior (config without category) {{{

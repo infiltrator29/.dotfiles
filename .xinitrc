@@ -2,8 +2,6 @@
 
 numlockx &
 setxkbmap -option caps:swapescape &
-
-# set color scheme
-wpg -s spatialnihilism.jpg &
+setxkbmap -layout "pl" &
 
 exec awesome
