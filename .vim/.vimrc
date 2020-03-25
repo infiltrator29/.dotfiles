@@ -375,6 +375,8 @@ nnoremap <leader>u :MundoToggle<CR>
     " close NERDTree with the last buffor
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
+    " Show status for ignored files
+    let g:NERDTreeShowIgnoredStatus = 1
     " }}}
 " Hardtime settings {{{ 
 let g:hardtime_default_on = 0   " Always run harditme

@@ -80,7 +80,7 @@ set -o vi
 tput smkx
 
 #Alias for manage dotfiles git repo
-alias config='/usr/bin/git --git-dir=/home/infiltrator/.dotfiles/ --work-tree=/home/infiltrator'
+alias dotfiles='/usr/bin/git --git-dir=/home/infiltrator/.dotfiles/ --work-tree=/home/infiltrator'
 
 
 

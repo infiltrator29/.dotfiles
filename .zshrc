@@ -86,6 +86,7 @@ plugins=(
     gitignore
     rand-quote
     lol
+    zsh-syntax-highlighting
     #dogesay
 )
 
