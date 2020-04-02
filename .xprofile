@@ -1,2 +1,0 @@
-setxkbmap -layout "pl" &
-setxkbmap -option caps:swapescape &
