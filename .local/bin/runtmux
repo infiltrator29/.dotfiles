@@ -1,3 +1,0 @@
-#!/usr/bin/sh
-
-tmux attach -t df || tmux new-session -s df
