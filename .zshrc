@@ -1,4 +1,45 @@
 
+# {{{ Aliases
+
+alias t='tmux attach'
+alias crn='cat ~/.cache/corona/corona_pl'
+
+# Alias for manage dotfiles git repo
+alias dotfiles='/usr/bin/git --git-dir=/home/infiltrator/.dotfiles/ --work-tree=/home/infiltrator'
+
+#LSD alias
+alias ls='lsd'
+alias lst='lsd --tree'
+
+alias cls='clear'
+alias q='exit'
+
+# }}}
+
+autoload -Uz compinit promptinit
+compinit
+promptinit
+
+zstyle ':completion::complete:*' gain-privileges 1
+
+#'Delete' key work in ST:
+tput smkx
+
+#for 'pj' zsh plugin:
+PROJECT_PATHS=(~/data/jstuff/dev)
+
+unset zle_bracketed_paste
+
+# Spaceship prompt theme options: {{{
+SPACESHIP_TIME_SHOW=true
+SPACESHIP_TIME_COLOR='red'
+SPACESHIP_GIT_PREFIX='on   '
+# }}}
+# TMUX options (plugin) {{{
+#ZSH_TMUX_AUTOSTART=true
+#ZSH_TMUX_AUTOSTART_ONCE=false
+# }}}
+
 # {{{ Oh! My Zsh 
 
 # If you come from bash you might have to change your $PATH.
@@ -120,45 +161,6 @@ source $ZSH/oh-my-zsh.sh
 
 
 # }}}
-# {{{ Aliases
 
-# Alias for manage dotfiles git repo
-alias dotfiles='/usr/bin/git --git-dir=/home/infiltrator/.dotfiles/ --work-tree=/home/infiltrator'
-#LSD alias
-alias ls='lsd'
-alias lst='lsd --tree'
-#Color cat
-ccat() {
-    highlight --delim-cr --out-format=ansi "$1" | sed -e "s/^/│/" | cat -n 
-}
-#Color cat (no line nubers)
-alias ccatn='highlight --delim-cr --out-format=ansi'
-
-
-
-alias cls='clear'
-alias q='exit'
-
-# }}}
-
-autoload -Uz compinit promptinit
-compinit
-promptinit
-
-zstyle ':completion::complete:*' gain-privileges 1
-
-#'Delete' key work in ST:
-tput smkx
-
-#for 'pj' zsh plugin:
-PROJECT_PATHS=(~/data/jstuff/dev)
-
-# {{{ Spaceship prompt theme options:
-SPACESHIP_TIME_SHOW=true
-SPACESHIP_TIME_COLOR='red'
-SPACESHIP_GIT_PREFIX='on   '
-# }}}
-
-unset zle_bracketed_paste
 
 # vim:foldmethod=marker:foldlevel=0

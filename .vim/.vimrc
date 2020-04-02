@@ -27,6 +27,10 @@ Plug 'vimwiki/vimwiki'                  " Plugin for taking and organizing notes
 Plug 'ryanoasis/vim-devicons'           " Add icons for VIM plugins (need load after the other plugins) - Nerd Fonts needed
 Plug 'altercation/vim-colors-solarized' " Solarized colorscheme
 Plug 'luochen1990/rainbow'              " Coloring parentheses
+Plug 'christoomey/vim-tmux-navigator'   " Switch beetwen tmux and vim panes easly
+Plug 'unblevable/quick-scope'           " An always-on highlight for a unique character in every word on a line to help you use f, F and family. 
+Plug 'gorodinskiy/vim-coloresque'       " A very fast, multi-syntax context-sensitive color name highlighter
+Plug 'tpope/vim-surround'               " The plugin provides mappings to easily delete, change and add such surroundings in pairs 
 
 " initialize plugin system
 call plug#end()
@@ -100,7 +104,7 @@ nnoremap <space> za
 set textwidth=79
 set nowrap 
 set linebreak   " don't break words
-set fo-=t
+set formatoptions-=t
 set colorcolumn=80
 
 " }}}
@@ -114,10 +118,11 @@ nnoremap k gk
 inoremap jj <esc>
 
 " better split window navigation (CTRL + h/j/l/l)
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-l> <c-w>l
-map <c-h> <c-w>h
+"map <c-j> <c-w>j
+"map <c-k> <c-w>k
+"map <c-l> <c-w>l
+"map <c-h> <c-w>h
+" ^ now handle by vim-tmux-navigator
 
 
 " Navigating with guides
@@ -187,6 +192,7 @@ augroup pythonConfig
     autocmd Filetype python nnoremap ,she i#!/usr/bin/env<space>python<Esc>o<Enter>
     autocmd Filetype python inoremap ,im import<space>
     autocmd Filetype python inoremap ,fim from<space><space>import<space><++><Esc>2b2ha
+    autocmd Filetype python nnoremap ,d i"""<CR><++><CR>"""<++><Esc>kkA
 augroup END
 
 augroup rmdConfig
@@ -221,6 +227,12 @@ augroup END
 augroup cssConfig
     autocmd!
     "Code snippets
+augroup END
+
+augroup luaConfig
+    autocmd!
+    " Code Snippets
+    autocmd Filetype lua nnoremap ,r :!awmtt restart<CR>
 augroup END
 
 " }}}
@@ -393,6 +405,10 @@ let g:vimwiki_folding = 'list'
 " Rainbow settings {{{
 let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowToggle
 " }}}
+" vim-tmux-navigator {{{
+" Save all buffers when switch to tmux pane
+let g:tmux_navigator_save_on_switch = 2
+" }}}
 
     " Vim behavior (config without category) {{{
 
@@ -429,4 +445,4 @@ let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowTo
 
 
 
-    " vim:foldmethod=marker:foldlevel=0
+" vim:foldmethod=marker:foldlevel=0
