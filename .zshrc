@@ -2,7 +2,6 @@
 # {{{ Aliases
 
 alias t='tmux attach'
-alias crn='cat ~/.cache/corona/corona_pl'
 
 # Alias for manage dotfiles git repo
 alias dotfiles='/usr/bin/git --git-dir=/home/infiltrator/.dotfiles/ --work-tree=/home/infiltrator'
@@ -24,9 +23,6 @@ zstyle ':completion::complete:*' gain-privileges 1
 
 #'Delete' key work in ST:
 tput smkx
-
-#for 'pj' zsh plugin:
-PROJECT_PATHS=(~/data/jstuff/dev)
 
 unset zle_bracketed_paste
 
@@ -120,15 +116,10 @@ plugins=(
     copydir 
     cp 
     tmux 
-    web-search 
     fasd 
-    pj 
     github
     gitignore
-    rand-quote
-    lol
     zsh-syntax-highlighting
-    #dogesay
 )
 
 source $ZSH/oh-my-zsh.sh
