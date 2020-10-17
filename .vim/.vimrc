@@ -31,6 +31,17 @@ Plug 'christoomey/vim-tmux-navigator'   " Switch beetwen tmux and vim panes easl
 Plug 'unblevable/quick-scope'           " An always-on highlight for a unique character in every word on a line to help you use f, F and family. 
 Plug 'gorodinskiy/vim-coloresque'       " A very fast, multi-syntax context-sensitive color name highlighter
 Plug 'tpope/vim-surround'               " The plugin provides mappings to easily delete, change and add such surroundings in pairs 
+Plug 'tpope/vim-fugitive'               " Plugin for comfortable using GIT directly from VIM
+Plug 'junegunn/gv.vim'                  " GIT commit browser (git-fugitive required)
+Plug 'sheerun/vim-polyglot'             " A collection of language packs for Vim (syntax highlight, indentation etc)
+Plug 'dense-analysis/ale'               " ALE (Asynchronous Lint Engine) is a plugin providing linting (syntax checking and semantic errors)
+
+" Signify (or just Sy) uses the sign column to indicate added, modified and removed lines in a file that is managed by a version control system (VCS).
+if has('nvim') || has('patch-8.0.902')  
+  Plug 'mhinz/vim-signify'
+else
+  Plug 'mhinz/vim-signify', { 'branch': 'legacy' }
+endif
 
 " initialize plugin system
 call plug#end()
@@ -41,6 +52,7 @@ syntax enable	" enable syntax processing
 
 colorscheme solarized
 set background=dark
+highlight SignColumn ctermbg=8 
 let g:airline_theme='wpgtk_alternate'
 
 " }}}
@@ -119,8 +131,7 @@ inoremap jj <esc>
 
 " better split window navigation (CTRL + h/j/l/l)
 "map <c-j> <c-w>j
-"map <c-k> <c-w>k
-"map <c-l> <c-w>l
+"map <c-k> <c-w>k "map <c-l> <c-w>l
 "map <c-h> <c-w>h
 " ^ now handle by vim-tmux-navigator
 
@@ -177,11 +188,14 @@ augroup autoclosingConfig
     autocmd Filetype * inoremap " ""<++><Esc>F";a
     autocmd Filetype * inoremap :" "
     autocmd Filetype * inoremap "" ""
-    autocmd Filetype python inoremap { {}<++><Esc>F{a
-    autocmd Filetype python inoremap *{ {
+    autocmd BufEnter *.tsx inoremap { {}<++><Esc>F{a
+    autocmd BufEnter *.tsx inoremap p{ {
+    autocmd BufEnter *.tsx inoremap {} {}
+    autocmd filetype python inoremap { {}<++><Esc>F{a
+    autocmd Filetype python inoremap p{ {
     autocmd Filetype python inoremap {} {}
     autocmd Filetype python inoremap [ []<++><Esc>F[a
-    autocmd Filetype python inoremap *[ [
+    autocmd Filetype python inoremap p[ [
     autocmd Filetype python inoremap [] []
     autocmd Filetype php,css,javascript,lua inoremap { {<Enter>}<Esc>O
 augroup END
@@ -193,6 +207,8 @@ augroup pythonConfig
     autocmd Filetype python inoremap ,im import<space>
     autocmd Filetype python inoremap ,fim from<space><space>import<space><++><Esc>2b2ha
     autocmd Filetype python nnoremap ,d i"""<CR><++><CR>"""<++><Esc>kkA
+    autocmd Filetype python nnoremap ,pt iprint("")<++><Esc>F"i
+    autocmd Filetype python nnoremap ,pb iprint()<++><Esc>F(a
 augroup END
 
 augroup rmdConfig
@@ -233,6 +249,17 @@ augroup luaConfig
     autocmd!
     " Code Snippets
     autocmd Filetype lua nnoremap ,r :!awmtt restart<CR>
+augroup END
+
+augroup webDevPrettierFormatters
+    " FORMATTERS
+    au FileType javascript setlocal formatprg=prettier
+    au FileType javascript.jsx setlocal formatprg=prettier
+    au FileType typescript setlocal formatprg=prettier\ --parser\ typescript
+    au FileType html setlocal formatprg=js-beautify\ --type\ html
+    au FileType scss setlocal formatprg=prettier\ --parser\ css
+    au FileType css setlocal formatprg=prettier\ --parser\ css
+    au BufEnter *.js,*.jsx,*.tsx,*.html,*.scss,*.css nmap <leader>p mzgggqG`z
 augroup END
 
 " }}}
@@ -307,6 +334,7 @@ nnoremap <leader>u :MundoToggle<CR>
         
     " enable Smarter tab line
     let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#formatter = 'unique_tail'
 
     " powerline font symbols
     let g:airline_powerline_fonts = 1
@@ -409,6 +437,41 @@ let g:rainbow_active = 1 "set to 0 if you want to enable it later via :RainbowTo
 " Save all buffers when switch to tmux pane
 let g:tmux_navigator_save_on_switch = 2
 " }}}
+" vim-javascript (provided by vim-polyglot) {{{
+let g:javascript_conceal_function             = "ƒ"
+let g:javascript_conceal_null                 = "ø"
+let g:javascript_conceal_this                 = "@"
+let g:javascript_conceal_return               = "⇚"
+let g:javascript_conceal_undefined            = "¿"
+let g:javascript_conceal_NaN                  = "ℕ"
+let g:javascript_conceal_prototype            = "¶"
+let g:javascript_conceal_static               = "•"
+let g:javascript_conceal_super                = "Ω"
+let g:javascript_conceal_arrow_function       = "⇒"
+let g:javascript_conceal_noarg_arrow_function = "🞅"
+let g:javascript_conceal_underscore_arrow_function = "🞅"
+" }}}
+" ALE (Linting) {{{
+let g:ale_fixers = {
+  \    'javascript': ['eslint'],
+  \    'typescript': ['prettier', 'tslint'],
+  \    'vue': ['eslint'],
+  \    'scss': ['prettier'],
+  \    'html': ['prettier'],
+  \    'reason': ['refmt']
+\}
+let g:ale_fix_on_save = 1
+
+nnoremap ]r :ALENextWrap<CR>     " move to the next ALE warning / error
+nnoremap [r :ALEPreviousWrap<CR> " move to the previous ALE warning / error
+
+let g:ale_set_loclist = 0
+let g:ale_set_quickfix = 1
+" }}}
+" vim-signify {{{
+set updatetime=1000
+" }}}
+
 
     " Vim behavior (config without category) {{{
 

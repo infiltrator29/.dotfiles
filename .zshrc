@@ -1,6 +1,19 @@
 
 # {{{ Aliases
 
+# Run virtualenv
+alias sba="source bin/activate"
+alias sva="source venv/bin/activate"
+
+# Django
+alias pym='python manage.py'
+
+#Vimwiki alias
+alias vwik='vim -c VimwikiIndex'
+
+#Calendar starts with monday
+alias cal='cal -m'
+
 alias t='tmux attach'
 alias crn='cat ~/.cache/corona/corona_pl'
 
@@ -24,6 +37,9 @@ zstyle ':completion::complete:*' gain-privileges 1
 
 #'Delete' key work in ST:
 tput smkx
+
+# Custom python path
+export PYTHONPATH=$HOME/.local/lib/my-python
 
 #for 'pj' zsh plugin:
 PROJECT_PATHS=(~/data/jstuff/dev)
@@ -128,6 +144,7 @@ plugins=(
     rand-quote
     lol
     zsh-syntax-highlighting
+    docker
     #dogesay
 )
 

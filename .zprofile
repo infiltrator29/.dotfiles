@@ -8,3 +8,4 @@ export GOROOT=$HOME/.go
 
 export EDITOR="vim"
 export TERMINAL="st"
+
