@@ -14,8 +14,6 @@ alias vwik='vim -c VimwikiIndex'
 #Calendar starts with monday
 alias cal='cal -m'
 
-alias t='tmux attach'
-alias crn='cat ~/.cache/corona/corona_pl'
 
 # Alias for manage dotfiles git repo
 alias dotfiles='/usr/bin/git --git-dir=/home/infiltrator/.dotfiles/ --work-tree=/home/infiltrator'
@@ -24,8 +22,11 @@ alias dotfiles='/usr/bin/git --git-dir=/home/infiltrator/.dotfiles/ --work-tree=
 alias ls='lsd'
 alias lst='lsd --tree'
 
+#Others
 alias cls='clear'
 alias q='exit'
+alias t='tmux attach'
+alias crn='cat ~/.cache/corona/corona_pl'
 
 # }}}
 
@@ -47,9 +48,12 @@ PROJECT_PATHS=(~/data/jstuff/dev)
 unset zle_bracketed_paste
 
 # Spaceship prompt theme options: {{{
-SPACESHIP_TIME_SHOW=true
-SPACESHIP_TIME_COLOR='red'
+SPACESHIP_TIME_SHOW=false 
 SPACESHIP_GIT_PREFIX='on   '
+SPACESHIP_VENV_SHOW=false
+SPACESHIP_CHAR_SYMBOL=' '
+SPACESHIP_VI_MODE_INSERT=' '
+SPACESHIP_VI_MODE_NORMAL=''
 # }}}
 # TMUX options (plugin) {{{
 #ZSH_TMUX_AUTOSTART=true
@@ -59,7 +63,7 @@ SPACESHIP_GIT_PREFIX='on   '
 # {{{ Oh! My Zsh 
 
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$PATH
+#export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$HOME/.emacs.d/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/infiltrator/.oh-my-zsh"
@@ -178,6 +182,17 @@ source $ZSH/oh-my-zsh.sh
 
 
 # }}}
+
+# INIT STARSHIP PROMPTS
+#eval "$(starship init zsh)"
+
+# SOURCE AwesomeWM theme settings
+if [ -f ~/.config/awesome/dotfiles/zshrc ]; then
+    source ~/.config/awesome/dotfiles/zshrc
+fi
+
+START_POINT=$HOME/.local/var/START_POINT
+[[ -f "$START_POINT" ]] && cd $(cat $START_POINT)
 
 
 # vim:foldmethod=marker:foldlevel=0

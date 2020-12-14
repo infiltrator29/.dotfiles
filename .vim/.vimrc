@@ -35,6 +35,7 @@ Plug 'tpope/vim-fugitive'               " Plugin for comfortable using GIT direc
 Plug 'junegunn/gv.vim'                  " GIT commit browser (git-fugitive required)
 Plug 'sheerun/vim-polyglot'             " A collection of language packs for Vim (syntax highlight, indentation etc)
 Plug 'dense-analysis/ale'               " ALE (Asynchronous Lint Engine) is a plugin providing linting (syntax checking and semantic errors)
+Plug 'chriskempson/base16-vim'          " BASE16 colorscheme
 
 " Signify (or just Sy) uses the sign column to indicate added, modified and removed lines in a file that is managed by a version control system (VCS).
 if has('nvim') || has('patch-8.0.902')  
@@ -50,9 +51,9 @@ call plug#end()
 " Colors and apperance {{{
 syntax enable	" enable syntax processing
 
-colorscheme solarized
-set background=dark
-highlight SignColumn ctermbg=8 
+colorscheme wpgtk
+" set background=dark
+" highlight SignColumn ctermbg=8 
 let g:airline_theme='wpgtk_alternate'
 
 " }}}
@@ -66,7 +67,7 @@ let g:airline_theme='wpgtk_alternate'
 " UserInterface configuration {{{
 set number
 set relativenumber	" show line numbers
-set cursorline      " highlite current line
+"set cursorline      " highlite current line
 set showcmd         " show last command in the bottom
 set wildmenu        " visual autocomplete for command menu
 set showmatch       " highlight matching brackets
@@ -505,6 +506,9 @@ set updatetime=1000
 
     " }}}
 
+" AwesomeWM theme overwrite {{{
+source ~/.config/awesome/dotfiles/vimrc
+" }}}
 
 
 

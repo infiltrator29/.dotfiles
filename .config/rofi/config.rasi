@@ -1,0 +1,4 @@
+configuration {
+	font: "SauceCodePro Nerd Font semibold 14";
+	theme: "/usr/share/rofi/themes/Arc-Dark.rasi";
+}

@@ -1,0 +1,34 @@
+#!/usr/bin/env sh
+
+#======================================================
+#  Open each directory with new instance of terminal  
+#======================================================
+
+# Set this in .bashrc/.zshrc:
+#
+# START_POINT=$HOME/.local/var/START_POINT
+# [[ -f "$START_POINT" ]] && cd $(cat $START_POINT)
+
+echo "Starting..."
+START_POINT=$HOME/.local/var/START_POINT
+
+# Set default START_POINT always on the end of the script execution
+function cleanup {
+  echo $HOME > $START_POINT
+}
+trap cleanup EXIT
+
+for D in *
+do
+  if [ -d "${D}" ]; then
+    src="$(pwd)/$D"
+    echo $src > $START_POINT
+
+    echo "Opening ${src}..."
+    # RUN TERMINAL
+    st &> /dev/null &
+    # WAIT FOR EXIT TERMINAL
+    wait $!
+  fi
+done
+

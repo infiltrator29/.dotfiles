@@ -1,0 +1,21 @@
+#!/bin/sh
+
+# This script gets emoji from list and put it into clipboard
+
+# Must have xclip installed to even show menu.
+xclip -h 2>/dev/null || exit 1
+
+# On the beggining of each line is space followed by "‎/<200e>/u+200E"
+# (LEFt TO RIGHT MARK) for properly display arabic glyphs replaced with
+# Nerd Fonts icons. These white chars are removed when copying to clipboard.
+chosen=$(cut -d ';' -f1 ~/.local/share/emoji | rofi -dmenu | sed "s/^ ‎//;s/ .*//")
+
+[ "$chosen" != "" ] || exit
+
+# If you run this command with an argument, it will automatically insert the character.
+if [ -n "$1" ]; then
+	xdotool key Shift+Insert
+else
+	echo "$chosen" | tr -d '\n' | xclip -selection clipboard
+	notify-send "'$chosen' copied to clipboard." &
+fi

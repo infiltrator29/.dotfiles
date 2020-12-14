@@ -13,5 +13,5 @@ wget --spider --quiet $url
 
 
 cat ~/.cache/corona/corona_pl.json |
-    jq -r '. | {"pl": .[][0]?, "world": .["worldStats"]} | " [\(.pl.confirmed)(\(.pl.todayCases)) / \(.world.confirmed/1000 | floor)k]   [\(.world.deaths/1000 | floor)k / \(.pl.deaths)(\(.pl.todayDeaths))] ﮊ "'
+    jq -r '. | {"pl": .[][0]?, "world": .["worldStats"]} | " [\(.pl.confirmed)(\(.pl.todayCases)) / \(.world.confirmed/1000 | floor)k]  ‎ﮊ‎ [\(.pl.deaths)‎(\(.pl.todayDeaths))‎ ‎/‎ ‎\(.world.deaths/1000 | floor)k]"'
 
