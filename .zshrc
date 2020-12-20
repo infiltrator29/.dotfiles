@@ -1,35 +1,3 @@
-
-# {{{ Aliases
-
-# Run virtualenv
-alias sba="source bin/activate"
-alias sva="source venv/bin/activate"
-
-# Django
-alias pym='python manage.py'
-
-#Vimwiki alias
-alias vwik='vim -c VimwikiIndex'
-
-#Calendar starts with monday
-alias cal='cal -m'
-
-
-# Alias for manage dotfiles git repo
-alias dotfiles='/usr/bin/git --git-dir=/home/infiltrator/.dotfiles/ --work-tree=/home/infiltrator'
-
-#LSD alias
-alias ls='lsd'
-alias lst='lsd --tree'
-
-#Others
-alias cls='clear'
-alias q='exit'
-alias t='tmux attach'
-alias crn='cat ~/.cache/corona/corona_pl'
-
-# }}}
-
 autoload -Uz compinit promptinit
 compinit
 promptinit
@@ -180,6 +148,36 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+
+# }}}
+# {{{ Aliases
+
+# Run virtualenv
+alias sba="source bin/activate"
+alias sva="source venv/bin/activate"
+
+# Django
+alias pym='python manage.py'
+
+#Vimwiki alias
+alias vwik='vim -c VimwikiIndex'
+
+#Calendar starts with monday
+alias cal='cal -m'
+
+
+# Alias for manage dotfiles git repo
+alias dotfiles='/usr/bin/git --git-dir=/home/infiltrator/.dotfiles/ --work-tree=/home/infiltrator'
+
+#LSD alias (Oh!MyZsh overwrites ls command)
+alias ls='lsd'
+alias lst='lsd --tree'
+
+#Others
+alias cls='clear'
+alias q='exit'
+alias t='tmux attach'
+alias crn='cat ~/.cache/corona/corona_pl'
 
 # }}}
 

@@ -14,7 +14,7 @@ START_POINT=$HOME/.local/var/START_POINT
 
 # Set default START_POINT always on the end of the script execution
 function cleanup {
-  echo $HOME > $START_POINT
+    rm $START_POINT
 }
 trap cleanup EXIT
 
