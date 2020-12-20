@@ -510,7 +510,7 @@ set updatetime=1000
 source ~/.config/awesome/dotfiles/vimrc
 " }}}
 " PINEPHONE specific config {{{
-let s:device = system("cat /etc/hostname")
+let s:device = system("cat /etc/hostname &> /dev/null")
 echo s:device
 if s:device == "pinewolf"
     "some config
