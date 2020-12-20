@@ -509,6 +509,13 @@ set updatetime=1000
 " AwesomeWM theme overwrite {{{
 source ~/.config/awesome/dotfiles/vimrc
 " }}}
+" PINEPHONE specific config {{{
+let s:device = system("cat /etc/hostname")
+echo s:device
+if s:device == "pinewolf"
+    "some config
+endif
+" }}}
 
 
 

@@ -63,7 +63,7 @@ SPACESHIP_VI_MODE_NORMAL=''
 # {{{ Oh! My Zsh 
 
 # If you come from bash you might have to change your $PATH.
-#export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$HOME/.emacs.d/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$HOME/.emacs.d/bin:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/infiltrator/.oh-my-zsh"
@@ -190,6 +190,14 @@ source $ZSH/oh-my-zsh.sh
 if [ -f ~/.config/awesome/dotfiles/zshrc ]; then
     source ~/.config/awesome/dotfiles/zshrc
 fi
+
+# PinePhone specific configuration {{{
+if grep -q pinewolf /etc/hostname; then
+    [[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
+
+    PATH=$PATH:$HOME/.cargo/bin
+fi
+# }}}
 
 START_POINT=$HOME/.local/var/START_POINT
 [[ -f "$START_POINT" ]] && cd $(cat $START_POINT)
