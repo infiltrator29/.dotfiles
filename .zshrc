@@ -27,6 +27,10 @@ SPACESHIP_VI_MODE_NORMAL=''
 #ZSH_TMUX_AUTOSTART=true
 #ZSH_TMUX_AUTOSTART_ONCE=false
 # }}}
+# Pyenv virtualenv {{{
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+# }}}
 
 # {{{ Oh! My Zsh 
 
@@ -158,6 +162,10 @@ alias sva="source venv/bin/activate"
 
 # Django
 alias pym='python manage.py'
+alias pymr='python manage.py runserver'
+alias pymsa='python manage.py startapp'
+alias pymm='python manage.py migrate'
+alias pymk='python manage.py makemigrations'
 
 #Vimwiki alias
 alias vwik='vim -c VimwikiIndex'
@@ -181,14 +189,11 @@ alias crn='cat ~/.cache/corona/corona_pl'
 
 # }}}
 
-# INIT STARSHIP PROMPTS
-#eval "$(starship init zsh)"
-
-# SOURCE AwesomeWM theme settings
+# Source AwesomeWM theme settings {{{
 if [ -f ~/.config/awesome/dotfiles/zshrc ]; then
     source ~/.config/awesome/dotfiles/zshrc
 fi
-
+#}}}
 # PinePhone specific configuration {{{
 if grep -q pinewolf /etc/hostname; then
     [[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
@@ -196,6 +201,8 @@ if grep -q pinewolf /etc/hostname; then
     PATH=$PATH:$HOME/.cargo/bin
 fi
 # }}}
+
+eval spaceship_vi_mode_enable
 
 START_POINT=$HOME/.local/var/START_POINT
 [[ -f "$START_POINT" ]] && cd $(cat $START_POINT)

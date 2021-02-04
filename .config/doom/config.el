@@ -33,6 +33,8 @@
 ;; and available. You can either set `doom-theme' or manually load a
 ;; theme with the `load-theme' function. This is the default:
 (setq doom-theme 'doom-xresources)
+(add-hook 'after-init-hook 'global-color-identifiers-mode)
+
 
 (after! olivetti
   (setq olivetti-body-width 79))
@@ -109,7 +111,7 @@
 (after! vterm
   (add-hook 'vterm-mode-hook (lambda ()
                                (map! :mode 'vterm-mode :ne "SPC j" #'vterm-send-escape)
-                               (map! :mode 'vterm-mode :i "j j" #'vterm-send-escape))))
+                               (map! :mode 'vterm-mode :i "Q Q" #'vterm-send-escape))))
 
 
 ;;(setq org-roam-directory "~/org/roam/")
