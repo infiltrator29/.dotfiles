@@ -28,6 +28,7 @@ SPACESHIP_VI_MODE_NORMAL=''
 #ZSH_TMUX_AUTOSTART_ONCE=false
 # }}}
 # Pyenv virtualenv {{{
+export PATH=$HOME/.pyenv/bin:$PATH
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 # }}}
