@@ -70,6 +70,10 @@ source "$BASH_IT"/bash_it.sh
 
 # }}}
 
+export PATH="/home/user/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
 #Allow to navigate without cd (only path)
 shopt -s autocd
 
@@ -79,8 +83,10 @@ set -o vi
 #'Delete' key work in ST:
 tput smkx
 
-#Alias for manage dotfiles git repo
-alias dotfiles='/usr/bin/git --git-dir=/home/infiltrator/.dotfiles/ --work-tree=/home/infiltrator'
+# Alias for manage dotfiles git repo
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+# for Qube OS templateVM
+alias qdotfiles='/usr/bin/git --git-dir=/home.orig/.dotfiles/ --work-tree=/home.orig'
 
 
 

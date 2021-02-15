@@ -38,7 +38,7 @@ eval "$(pyenv virtualenv-init -)"
 export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$HOME/.emacs.d/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/infiltrator/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -175,7 +175,9 @@ alias cal='cal -m'
 
 
 # Alias for manage dotfiles git repo
-alias dotfiles='/usr/bin/git --git-dir=/home/infiltrator/.dotfiles/ --work-tree=/home/infiltrator'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+# for Qube OS templateVM
+alias qdotfiles='/usr/bin/git --git-dir=/home.orig/.dotfiles/ --work-tree=/home.orig'
 
 #LSD alias (Oh!MyZsh overwrites ls command)
 alias ls='lsd'
