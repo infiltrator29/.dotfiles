@@ -1,0 +1,2 @@
+#!/usr/bin/sh
+sudo rsync -av --chown user:user --exclude '.emacs.d' /home.orig/ /home/user/

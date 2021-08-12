@@ -16,6 +16,8 @@
 (package! base16-theme)
 (package! color-identifiers-mode)
 
+(package! evil-snipe :disable t)
+
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
 

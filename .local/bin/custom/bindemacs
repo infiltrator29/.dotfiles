@@ -1,0 +1,4 @@
+#!/usr/bin/sh
+sudo ln -s /home.orig/.emacs.d /home/user
+sudo chown -R user:user /home.orig/.emacs.d /home/user/.emacs.d
+echo Done.

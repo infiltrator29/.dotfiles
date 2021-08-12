@@ -1,0 +1,4 @@
+#!/usr/bin/sh
+command="sudo ln -s /home.orig/.emacs.d /home/user"
+grep -Fxq "$command" /rw/config/rc.local || echo -e "\n#Always bind doom emacs\n$command\nsudo chown -R user:user /home.orig/.emacs.d /home/user/.emacs.d" | sudo tee -a /rw/config/rc.local > /dev/null && echo "$command"
+echo -e "\nDone."

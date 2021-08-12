@@ -5,6 +5,10 @@
 
 ;; == KEYBINDIGS ==
 (map! :ne "SPC a" #'+hydra/window-nav/body) ;easy deal with emacs windows
+(map! :n "s" nil
+      :m  "s" #'evil-avy-goto-char-2
+      :nm "g s s" nil
+      :nm "g s s" #'evil-avy-goto-char-timer)
 
 (doom/set-frame-opacity 100)
 (setq +doom-dashboard-banner-dir "~/.config/doom/banner/")
@@ -32,7 +36,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed
 ;; and available. You can either set `doom-theme' or manually load a
 ;; theme with the `load-theme' function. This is the default:
-(setq doom-theme 'doom-xresources)
+(setq doom-theme 'doom-one)
 (add-hook 'after-init-hook 'global-color-identifiers-mode)
 
 
@@ -95,13 +99,16 @@
                                      (setq header-line-format " ")
                                      (custom-set-faces
                                       '(header-line ((t (:inherit header-line :height 1.5))))
-                                      )))
+                                      )
+                                     (setq fill-column 70)
+                                     ))
 
   (setq org-journal-date-format "%A, %d %B %Y"
         org-journal-file-format "%Y-%m-%d.org"
         org-journal-dir "~/org/roam/journal"
         org-journal-file-type 'daily
-        org-journal-time-prefix "*** "))
+        org-journal-time-prefix "*** "
+        org-extend-today-until 5))
 
 (after! deft
   (setq deft-directory "~/org/"
