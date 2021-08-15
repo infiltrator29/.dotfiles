@@ -10,6 +10,30 @@
       :nm "g s s" nil
       :nm "g s s" #'evil-avy-goto-char-timer)
 
+;; == CUSTOM FUNCTIONS ==
+(defun insert-last-screenshot-org ()
+  "Take a screenshot into a time stamped unique-named file in the
+same directory as the org-buffer and insert a link to this file."
+  (interactive)
+  (setq screenpath "/home/user/QubesIncoming/dom0")
+  (setq filename
+        ;; Get filename and trail whitespaces
+        (replace-regexp-in-string "\\`[ \t\n]*" "" (replace-regexp-in-string "[ \t\n]*\\'" ""
+                                                                             (shell-command-to-string (concat "cd " screenpath " && ls -1t *.png | head -1")))))
+
+  (setq newfilename
+        (concat
+         (make-temp-name
+          (concat (buffer-file-name)
+                  "_"
+                  (format-time-string "%Y%m%d_%H%M%S_")) ) ".png"))
+
+  ;; Move screenshot into relative directory
+  (shell-command (concat "mv " screenpath "/" filename " " newfilename))
+  (insert (concat "[[" newfilename "]]"))
+  (org-display-inline-images))
+
+
 (doom/set-frame-opacity 100)
 (setq +doom-dashboard-banner-dir "~/.config/doom/banner/")
 (setq +doom-dashboard-banner-padding '(1 . 2))
