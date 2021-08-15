@@ -15,22 +15,30 @@
   "Take a screenshot into a time stamped unique-named file in the
 same directory as the org-buffer and insert a link to this file."
   (interactive)
+
   (setq screenpath "/home/user/QubesIncoming/dom0")
+
   (setq filename
         ;; Get filename and trail whitespaces
         (replace-regexp-in-string "\\`[ \t\n]*" "" (replace-regexp-in-string "[ \t\n]*\\'" ""
                                                                              (shell-command-to-string (concat "cd " screenpath " && ls -1t *.png | head -1")))))
-
   (setq newfilename
         (concat
          (make-temp-name
-          (concat (buffer-file-name)
+          (concat (file-name-sans-extension (buffer-name))
                   "_"
                   (format-time-string "%Y%m%d_%H%M%S_")) ) ".png"))
+  (setq newpath
+        (concat (file-name-directory (buffer-file-name)) (file-name-sans-extension (buffer-name))))
 
-  ;; Move screenshot into relative directory
-  (shell-command (concat "mv " screenpath "/" filename " " newfilename))
-  (insert (concat "[[" newfilename "]]"))
+
+  ;; Rename file as a first step
+  (shell-command (concat "mv "screenpath"/"filename " " screenpath"/"newfilename))
+
+  ;; Move screenshot into relative directory (and create this directory)
+  (shell-command (concat "mkdir --parents "newpath"; mv " screenpath"/"newfilename " $_"))
+
+  (insert (concat "[[" newpath"/"newfilename "]]"))
   (org-display-inline-images))
 
 
