@@ -1,1 +1,1 @@
-spaceship-prompt/spaceship.zsh-theme
+/home/infiltrator/.oh-my-zsh/custom/themes/spaceship-prompt/spaceship.zsh-theme

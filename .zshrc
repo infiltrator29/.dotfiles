@@ -202,6 +202,9 @@ if grep -q pinewolf /etc/hostname; then
     [[ -r "/usr/share/z/z.sh" ]] && source /usr/share/z/z.sh
 
     PATH=$PATH:$HOME/.cargo/bin
+
+    alias awre=DISPLAY=":0 awesome-client 'awesome.restart()'"
+    alias d0='DISPLAY=:0'
 fi
 # }}}
 
