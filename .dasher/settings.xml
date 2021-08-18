@@ -5,9 +5,9 @@
 <long name="AutospeedSensitivity" value="100"/>
 <long name="ButtonCompassModeRightZoom" value="5120"/>
 <long name="ButtonMenuBoxes" value="4"/>
-<long name="ButtonMenuSafety" value="25"/>
+<long name="ButtonMenuSafety" value="29"/>
 <long name="ButtonMenuScanTime" value="0"/>
-<long name="ButtonModeNonuniformity" value="0"/>
+<long name="ButtonModeNonuniformity" value="-7"/>
 <long name="CirclePercent" value="10"/>
 <long name="ClickMaxZoom" value="200"/>
 <long name="DasherFontSize" value="2"/>
@@ -46,9 +46,9 @@
 <long name="OutlineWidth" value="0"/>
 <long name="PYProbabilitySortThreshold" value="85"/>
 <long name="PaletteChange" value="1"/>
-<long name="RenderStyle" value="1"/>
+<long name="RenderStyle" value="0"/>
 <long name="ScreenHeight" value="1369"/>
-<long name="ScreenOrientation" value="-2"/>
+<long name="ScreenOrientation" value="1"/>
 <long name="ScreenWidth" value="720"/>
 <long name="SlowStartTime" value="1000"/>
 <long name="SocketInputXMaxTimes1000" value="1000"/>
