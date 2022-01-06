@@ -3,12 +3,11 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
-;; == KEYBINDIGS ==
-(map! :ne "SPC a" #'+hydra/window-nav/body) ;easy deal with emacs windows
-(map! :n "s" nil
-      :m  "s" #'evil-avy-goto-char-2
-      :nm "g s s" nil
-      :nm "g s s" #'evil-avy-goto-char-timer)
+(setq doom-local-dir "/home/user/.emacs.local")
+
+
+
+
 
 ;; == CUSTOM FUNCTIONS ==
 (defun insert-last-screenshot-org ()
@@ -42,6 +41,16 @@ same directory as the org-buffer and insert a link to this file."
   (org-display-inline-images))
 
 
+
+
+;; == KEYBINDIGS ==
+(map! :ne "SPC a" #'+hydra/window-nav/body) ;easy deal with emacs windows
+(map! :n "s" nil
+      :m  "s" #'evil-avy-goto-char-2
+      :nm "g s s" nil
+      :nm "g s s" #'evil-avy-goto-char-timer)
+
+
 (doom/set-frame-opacity 100)
 (setq +doom-dashboard-banner-dir "~/.config/doom/banner/")
 (setq +doom-dashboard-banner-padding '(1 . 2))
@@ -68,9 +77,21 @@ same directory as the org-buffer and insert a link to this file."
 ;; There are two ways to load a theme. Both assume the theme is installed
 ;; and available. You can either set `doom-theme' or manually load a
 ;; theme with the `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+
+(setq doom-theme 'doom-one-darker)
+(setq doom-font (font-spec :family "Fira Code" :size 18 :weight 'semi-bold))
+
 (add-hook 'after-init-hook 'global-color-identifiers-mode)
 
+
+(global-tree-sitter-mode)
+(add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+(add-hook 'python-mode-hook (lambda () (rainbow-delimiters-mode)))
+
+;;  Company-jedi
+(defun my/python-mode-hook ()
+  (add-to-list 'company-backends 'company-jedi))
+(add-hook 'python-mode-hook 'my/python-mode-hook)
 
 (after! olivetti
   (setq olivetti-body-width 79))
@@ -152,6 +173,22 @@ same directory as the org-buffer and insert a link to this file."
                                (map! :mode 'vterm-mode :ne "SPC j" #'vterm-send-escape)
                                (map! :mode 'vterm-mode :i "Q Q" #'vterm-send-escape))))
 
+(use-package! websocket
+    :after org-roam)
+
+(use-package! org-roam-ui
+    :after org-roam ;; or :after org
+;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+;;         a hookable mode anymore, you're advised to pick something yourself
+;;         if you don't care about startup time, use
+;;  :hook (after-init . org-roam-ui-mode)
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
+
+
 
 ;;(setq org-roam-directory "~/org/roam/")
 
@@ -160,7 +197,11 @@ same directory as the org-buffer and insert a link to this file."
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
 
-
+;; better handling of text objects eg. hello_world is treated as single world
+(with-eval-after-load 'evil
+    (defalias #'forward-evil-word #'forward-evil-symbol)
+    ;; make evil-search-word look for symbol rather than word boundaries
+    (setq-default evil-symbol-word-search t))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;

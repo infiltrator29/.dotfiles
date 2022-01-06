@@ -1,0 +1,3 @@
+#!/usr/bin/sh
+new_config_dir="$1"
+sudo rsync -av --chown root:root "$new_config_dir" /home.orig/

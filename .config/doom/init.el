@@ -21,10 +21,15 @@
 
        :completion
        company           ; the ultimate code completion backend
-       ;;helm              ; the *other* search engine for love and life
-       ;;ido               ; the other *other* search engine...
-       ivy               ; a search engine for love and life
-
+       (helm              ; the *other* search engine for love and life
+        +fuzzy
+        +childframe
+        +icons)
+       ;; ido               ; the other *other* search engine...
+       (ivy
+        +icons
+        +fuzzy
+        +prescient) ; a search engine for love and life
        :ui
        deft              ; notational velocity for Emacs
        doom              ; what makes DOOM look the way it does
@@ -164,7 +169,7 @@
        (org               ; organize your plain life in plain text
         +dragndrop
         +journal
-        +roam
+        +roam2
         +present
         +pomodoro
         )

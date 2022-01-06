@@ -32,6 +32,9 @@ export PATH=$HOME/.pyenv/bin:$PATH
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 # }}}
+# zsh-autosugestions {{{
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+# }}}
 
 # {{{ Oh! My Zsh 
 
@@ -122,6 +125,7 @@ plugins=(
     lol
     zsh-syntax-highlighting
     docker
+    zsh-autosuggestions
     #dogesay
 )
 

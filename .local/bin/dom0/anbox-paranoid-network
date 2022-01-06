@@ -1,0 +1,6 @@
+#!/usr/bin/sh
+qvm-volume config anbox-paranoid:root rw False
+
+qvm-prefs anbox-paranoid netvm 'sys-whonix' &&\
+qvm-run -u root -p anbox-paranoid "/home/user/.local/bin/anbox-bridge start" &&\
+qvm-run -p anbox-paranoid anbox.appmgr

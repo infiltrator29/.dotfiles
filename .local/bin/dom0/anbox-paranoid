@@ -1,0 +1,5 @@
+#!/usr/bin/sh
+qvm-volume config anbox-paranoid:root rw False
+
+qvm-prefs anbox-paranoid netvm '' &&\
+qvm-run -p anbox-paranoid anbox.appmgr
