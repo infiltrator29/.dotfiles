@@ -3,8 +3,53 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
+(setq doom-local-dir "/home/user/.emacs.local")
+
+
+
+
+
+;; == CUSTOM FUNCTIONS ==
+(defun insert-last-screenshot-org ()
+  "Take a screenshot into a time stamped unique-named file in the
+same directory as the org-buffer and insert a link to this file."
+  (interactive)
+
+  (setq screenpath "/home/user/QubesIncoming/dom0")
+
+  (setq filename
+        ;; Get filename and trail whitespaces
+        (replace-regexp-in-string "\\`[ \t\n]*" "" (replace-regexp-in-string "[ \t\n]*\\'" ""
+                                                                             (shell-command-to-string (concat "cd " screenpath " && ls -1t *.png | head -1")))))
+  (setq newfilename
+        (concat
+         (make-temp-name
+          (concat (file-name-sans-extension (buffer-name))
+                  "_"
+                  (format-time-string "%Y%m%d_%H%M%S_")) ) ".png"))
+  (setq newpath
+        (concat (file-name-directory (buffer-file-name)) (file-name-sans-extension (buffer-name))))
+
+
+  ;; Rename file as a first step
+  (shell-command (concat "mv "screenpath"/"filename " " screenpath"/"newfilename))
+
+  ;; Move screenshot into relative directory (and create this directory)
+  (shell-command (concat "mkdir --parents "newpath"; mv " screenpath"/"newfilename " $_"))
+
+  (insert (concat "[[" newpath"/"newfilename "]]"))
+  (org-display-inline-images))
+
+
+
+
 ;; == KEYBINDIGS ==
 (map! :ne "SPC a" #'+hydra/window-nav/body) ;easy deal with emacs windows
+(map! :n "s" nil
+      :m  "s" #'evil-avy-goto-char-2
+      :nm "g s s" nil
+      :nm "g s s" #'evil-avy-goto-char-timer)
+
 
 (doom/set-frame-opacity 100)
 (setq +doom-dashboard-banner-dir "~/.config/doom/banner/")
@@ -32,9 +77,19 @@
 ;; There are two ways to load a theme. Both assume the theme is installed
 ;; and available. You can either set `doom-theme' or manually load a
 ;; theme with the `load-theme' function. This is the default:
-(setq doom-theme 'doom-xresources)
+(setq doom-theme 'doom-one-darker)
+(setq doom-font (font-spec :family "Fira Code" :size 18 :weight 'semi-bold))
 (add-hook 'after-init-hook 'global-color-identifiers-mode)
 
+
+(global-tree-sitter-mode)
+(add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+(add-hook 'python-mode-hook (lambda () (rainbow-delimiters-mode)))
+
+;;  Company-jedi
+(defun my/python-mode-hook ()
+  (add-to-list 'company-backends 'company-jedi))
+(add-hook 'python-mode-hook 'my/python-mode-hook)
 
 (after! olivetti
   (setq olivetti-body-width 79))
@@ -95,13 +150,16 @@
                                      (setq header-line-format " ")
                                      (custom-set-faces
                                       '(header-line ((t (:inherit header-line :height 1.5))))
-                                      )))
+                                      )
+                                     (setq fill-column 70)
+                                     ))
 
   (setq org-journal-date-format "%A, %d %B %Y"
         org-journal-file-format "%Y-%m-%d.org"
         org-journal-dir "~/org/roam/journal"
         org-journal-file-type 'daily
-        org-journal-time-prefix "*** "))
+        org-journal-time-prefix "*** "
+        org-extend-today-until 5))
 
 (after! deft
   (setq deft-directory "~/org/"
@@ -113,6 +171,22 @@
                                (map! :mode 'vterm-mode :ne "SPC j" #'vterm-send-escape)
                                (map! :mode 'vterm-mode :i "Q Q" #'vterm-send-escape))))
 
+(use-package! websocket
+    :after org-roam)
+
+(use-package! org-roam-ui
+    :after org-roam ;; or :after org
+;;         normally we'd recommend hooking orui after org-roam, but since org-roam does not have
+;;         a hookable mode anymore, you're advised to pick something yourself
+;;         if you don't care about startup time, use
+;;  :hook (after-init . org-roam-ui-mode)
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
+
+
 
 ;;(setq org-roam-directory "~/org/roam/")
 
@@ -121,7 +195,11 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
 
-
+;; better handling of text objects eg. hello_world is treated as single world
+(with-eval-after-load 'evil
+    (defalias #'forward-evil-word #'forward-evil-symbol)
+    ;; make evil-search-word look for symbol rather than word boundaries
+    (setq-default evil-symbol-word-search t))
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;

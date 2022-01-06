@@ -1,0 +1,34 @@
+#!/usr/bin/sh
+
+current_memory=$(qvm-prefs --get sys-usb memory)
+
+webcam_min_mem=1024
+sys_usb_standard_mem=300
+
+set_mem() {
+	qvm-prefs --set sys-usb memory $1
+	current_memory=$1
+	show_status
+}
+
+show_status() {
+	[ $current_memory -lt $webcam_min_mem ] &&\
+		notify-send -i camera-off "video_call is off" "Init RAM of sys-usb is $current_memory" ||\
+	       	notify-send -i camera-on "video_call is on" "Init RAM of sys-usb is $current_memory" 
+}
+
+[ "$1" = i ] && (show_status ; exit 0)
+   
+[ "$1" = r ] &&(\
+	show_status &&\
+       	notify-send -i camera "video_call restart" "restarting AppVM (sys-usb)" &&\
+       	qvm-kill sys-usb && qvm-start sys-usb &&\
+	exit 0)
+
+[ "$1" = "" ] &&(\
+	[ $current_memory -lt $webcam_min_mem ] &&\
+	set_mem $webcam_min_mem || set_mem $sys_usb_standard_mem &&\
+	qvm-kill sys-usb && qvm-start sys-usb)
+
+exit 0
+

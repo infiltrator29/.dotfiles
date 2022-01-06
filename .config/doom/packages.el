@@ -16,6 +16,25 @@
 (package! base16-theme)
 (package! color-identifiers-mode)
 
+(package! evil-snipe :disable t)
+
+(unpin! org-roam)
+(package! websocket)
+(package! org-roam-ui :recipe (:host github :repo "org-roam/org-roam-ui" :files ("*.el" "out")))
+
+(package! org-noter)
+
+(package! tree-sitter)
+(package! tree-sitter-langs)
+
+(package! company-jedi)
+
+(package! web-mode)
+;; (package! ligature
+;;  :recipe (:host github :repo "mickeynp/ligature.el" :files ("*el")))
+
+;; (package! pdf-tools) ;; already installed with doom
+
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
 

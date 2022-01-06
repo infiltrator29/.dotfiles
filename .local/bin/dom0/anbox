@@ -1,0 +1,4 @@
+#!/usr/bin/sh
+qvm-run -u root -p anbox "/home/user/.local/bin/anbox-bridge start" &&\
+qvm-run -p anbox anbox.appmgr &&\
+qvm-run -p anbox anbox.appmgr

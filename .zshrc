@@ -28,14 +28,18 @@ SPACESHIP_VI_MODE_NORMAL=''
 #ZSH_TMUX_AUTOSTART_ONCE=false
 # }}}
 # Pyenv virtualenv {{{
+export PATH=$HOME/.pyenv/bin:$PATH
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+# }}}
+# zsh-autosugestions {{{
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 # }}}
 
 # {{{ Oh! My Zsh 
 
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$HOME/.emacs.d/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$HOME/.local/bin:$HOME/.emacs.d/bin:$HOME/.local/bin/custom:$PATH
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -121,6 +125,7 @@ plugins=(
     lol
     zsh-syntax-highlighting
     docker
+    zsh-autosuggestions
     #dogesay
 )
 
