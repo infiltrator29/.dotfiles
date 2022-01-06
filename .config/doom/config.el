@@ -77,8 +77,10 @@ same directory as the org-buffer and insert a link to this file."
 ;; There are two ways to load a theme. Both assume the theme is installed
 ;; and available. You can either set `doom-theme' or manually load a
 ;; theme with the `load-theme' function. This is the default:
+
 (setq doom-theme 'doom-one-darker)
 (setq doom-font (font-spec :family "Fira Code" :size 18 :weight 'semi-bold))
+
 (add-hook 'after-init-hook 'global-color-identifiers-mode)
 
 

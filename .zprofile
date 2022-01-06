@@ -12,3 +12,10 @@ eval "$(pyenv virtualenv-init -)"
 export EDITOR="vim"
 export TERMINAL="st"
 
+
+# PinePhone specific configuration {{{
+if grep -q pinewolf /etc/hostname; then
+
+    syncthing -no-browser > /dev/null &
+fi
+# }}}

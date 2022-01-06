@@ -7,3 +7,4 @@
 rofi.font: SauceCodePro Nerd Font semibold 14
 ranger.font: -*-terminus-bold-r-*-*-20-*-*-*-*-*-*-*
 
+Xft.dpi: 192
